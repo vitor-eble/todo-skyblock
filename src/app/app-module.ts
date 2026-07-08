@@ -7,11 +7,15 @@ import { Home } from './pages/home/home';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [App, Home],
+  declarations: [
+    App,
+    Home,
+  ],
   imports: [
     BrowserModule,
-     AppRoutingModule,
-    ],
+    AppRoutingModule,
+    FormsModule
+  ],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })

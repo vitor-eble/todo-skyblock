@@ -1,1 +1,25 @@
+<div class="w-screen h-dvh overflow-hidden flex flex-col gap-4">
+  <h1 class="text-5xl font-bold w-3/4  text-neutral-800 p-4 mx-auto flex justify-center h-32 items-center border-b-2 border-zinc-300">
+    Skyblock To-Do
+  </h1>
+  <div class="w-3/4 mx-auto bg-red-300 flex justify-center ">
+    <div>
+      <input type="text" title="inputTitle" [(ngModel)]="tarefaTitle" placeholder="title">
+    </div>
+    <div>
+      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle">
+        Add
+      </button>
+    </div>
+  </div>
 
+  <div class="w-3/4 mx-auto bg-red-300 flex justify-center ">
+    <div>
+      <ul>
+        <li *ngFor="let tarefa of tarefas; let i = index">
+          {{ tarefa.id }}:{{ tarefa.title }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
