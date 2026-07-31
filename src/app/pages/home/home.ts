@@ -10,13 +10,19 @@ import { Tarefa } from '../../shared/models/tarefa'
 export class Home {
 
   tarefaTitle: string = '';
+  tarefaDescription: string = '';
 
   tarefas: Tarefa[] = [];
 
   addTarefa(){
     console.log('click');
-    this.tarefas.push({id: this.tarefas.length + 1, title: this.tarefaTitle})
+    this.tarefas.push({
+      id: this.tarefas.length + 1,
+      title: this.tarefaTitle,
+      description: this.tarefaDescription
+    })
     this.tarefaTitle = '';
+    this.tarefaDescription = '';
   }
 
 }

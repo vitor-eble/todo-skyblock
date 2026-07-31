@@ -1,4 +1,5 @@
 export interface Tarefa {
   id: number;
-  title: string
+  title: string;
+  description?: string;
 }

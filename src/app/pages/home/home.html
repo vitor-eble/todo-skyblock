@@ -2,24 +2,34 @@
   <h1 class="text-5xl font-bold w-3/4  text-neutral-800 p-4 mx-auto flex justify-center h-32 items-center border-b-2 border-zinc-300">
     Skyblock To-Do
   </h1>
-  <div class="w-3/4 mx-auto bg-red-300 flex justify-center ">
-    <div>
-      <input type="text" title="inputTitle" [(ngModel)]="tarefaTitle" placeholder="title">
+
+  <div class="w-3/4 mx-auto bg-red-300 flex justify-center  gap-4 p-4">
+    <div class="flex flex-col gap-4">
+      <div class="bg-red-500">
+        <input type="text" title="inputTitle" [(ngModel)]="tarefaTitle" placeholder="title">
+      </div>
+      <div class="bg-red-500">
+        <input type="text" title="inputDescription" [(ngModel)]="tarefaDescription" placeholder="description">
+      </div>
     </div>
+
     <div>
-      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle">
+      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle" class="bg-red-500 h-full">
         Add
       </button>
     </div>
   </div>
 
-  <div class="w-3/4 mx-auto bg-red-300 flex justify-center ">
-    <div>
-      <ul>
-        <li *ngFor="let tarefa of tarefas; let i = index">
-          {{ tarefa.id }}:{{ tarefa.title }}
+  <div class="w-3/4 mx-auto bg-red-300 flex justify-center p-4">
+    <ol class="bg-red-500 w-full p-4">
+        <li *ngFor="let tarefa of tarefas; let i = index" class=" p-4 mb-4">
+          <h2>
+            {{ tarefa.title }}
+          </h2>
+          <p>
+            {{ tarefa.description}}
+          </p>
         </li>
-      </ul>
-    </div>
+    </ol>
   </div>
 </div>
