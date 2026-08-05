@@ -11,6 +11,7 @@ export class Home {
 
   tarefaTitle: string = '';
   tarefaDescription: string = '';
+  dataCriation!: number
 
   tarefas: Tarefa[] = [];
 

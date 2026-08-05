@@ -3,25 +3,35 @@
     Skyblock To-Do
   </h1>
 
-  <div class="w-3/4 mx-auto bg-red-300 flex justify-center  gap-4 p-4">
-    <div class="flex flex-col gap-4">
-      <div class="bg-red-500">
-        <input type="text" title="inputTitle" [(ngModel)]="tarefaTitle" placeholder="title">
+  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-4 p-4">
+    <div class="flex flex-col gap-4 w-full p-4">
+
+      <div class="flex gap-8 w-full">
+        <div class="flex flex-col gap-1 w-1/2">
+          <label for="inputTitle" class="block text-xl font-semibold text-heading">Titulo</label>
+          <input type="text" title="inputTitle" id="inputTitle" [(ngModel)]="tarefaTitle" placeholder="item ou objetivo" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+        </div>
+        <div class="flex flex-col gap-1 w-1/2">
+          <label for="inputDataCriation" class="block text-xl font-semibold text-heading">Data de criação</label>
+          <input type="text" title="inputDataCriation" id="inputDataCriation" [(ngModel)]="dataCriation" placeholder="00/00/0000" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+        </div>
       </div>
-      <div class="bg-red-500">
-        <input type="text" title="inputDescription" [(ngModel)]="tarefaDescription" placeholder="description">
+
+      <div class="flex w-full flex-col gap-1">
+        <label for="inputDescription" class="block text-xl font-semibold text-heading">Descrição</label>
+        <input type="text" title="inputDescription" [(ngModel)]="tarefaDescription" placeholder="descreva o que você deseja fazer ou ter..." class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
       </div>
     </div>
 
-    <div>
-      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle" class="bg-red-500 h-full">
-        Add
+    <div class="flex flex-col gap-4 w-full p-4">
+      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle" class="bg-zinc-300 hover:bg-zinc-47700 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
+        Adiconar tarefa
       </button>
     </div>
   </div>
 
-  <div class="w-3/4 mx-auto bg-red-300 flex justify-center p-4">
-    <ol class="bg-red-500 w-full p-4">
+  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex justify-center gap-4 p-4" *ngIf="tarefas.length > 0">
+    <ol class="w-full p-4">
         <li *ngFor="let tarefa of tarefas; let i = index" class=" p-4 mb-4">
           <h2>
             {{ tarefa.title }}
