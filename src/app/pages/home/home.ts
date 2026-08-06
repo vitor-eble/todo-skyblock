@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Tarefa } from '../../shared/models/tarefa'
+import { Component, OnInit } from '@angular/core';
+import { Tarefa } from '../../shared/models/tarefa';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
@@ -11,19 +13,37 @@ export class Home {
 
   tarefaTitle: string = '';
   tarefaDescription: string = '';
-  dataCriation!: number
+  dataCriation!: number;
 
   tarefas: Tarefa[] = [];
+  formulario!: FormGroup;
+
+  constructor(
+    private FB: FormBuilder,
+  ) { }
+
+  ngOnInit() {
+    this.formulario = this.FB.group({
+      tarefaTitle: [this.tarefaTitle, Validators.required],
+      tarefaDescription: [this.tarefaDescription],
+      dataCriation: [this.dataCriation, Validators.required]
+    })
+   }
+
 
   addTarefa(){
     console.log('click');
     this.tarefas.push({
       id: this.tarefas.length + 1,
-      title: this.tarefaTitle,
-      description: this.tarefaDescription
+      title: this.formulario.get('tarefaTitle')?.value,
+      description: this.formulario.get('tarefaDescription')?.value,
+      dataCriation: this.formulario.get('dataCriation')?.value,
     })
-    this.tarefaTitle = '';
-    this.tarefaDescription = '';
+    this.formulario.reset();
+  }
+
+  cancelarFormulario(){
+    this.formulario.reset();
   }
 
 }

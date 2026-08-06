@@ -1,43 +1,51 @@
-<div class="w-screen h-dvh overflow-hidden flex flex-col gap-4">
+<div class="w-screen  overflow-hidden flex flex-col gap-4">
   <h1 class="text-5xl font-bold w-3/4  text-neutral-800 p-4 mx-auto flex justify-center h-32 items-center border-b-2 border-zinc-300">
     Skyblock To-Do
   </h1>
 
-  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-4 p-4">
+  <form (ngSubmit)="addTarefa()" [formGroup]="formulario" class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-4 p-4">
     <div class="flex flex-col gap-4 w-full p-4">
 
       <div class="flex gap-8 w-full">
         <div class="flex flex-col gap-1 w-1/2">
           <label for="inputTitle" class="block text-xl font-semibold text-heading">Titulo</label>
-          <input type="text" title="inputTitle" id="inputTitle" [(ngModel)]="tarefaTitle" placeholder="item ou objetivo" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+          <input type="text" title="inputTitle" id="inputTitle" formControlName="tarefaTitle" placeholder="item ou objetivo" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
         </div>
         <div class="flex flex-col gap-1 w-1/2">
           <label for="inputDataCriation" class="block text-xl font-semibold text-heading">Data de criação</label>
-          <input type="text" title="inputDataCriation" id="inputDataCriation" [(ngModel)]="dataCriation" placeholder="00/00/0000" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+          <input type="date" title="inputDataCriation" id="inputDataCriation" formControlName="dataCriation" class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
         </div>
       </div>
 
       <div class="flex w-full flex-col gap-1">
         <label for="inputDescription" class="block text-xl font-semibold text-heading">Descrição</label>
-        <input type="text" title="inputDescription" [(ngModel)]="tarefaDescription" placeholder="descreva o que você deseja fazer ou ter..." class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+        <input type="text" title="inputDescription" formControlName="tarefaDescription" placeholder="descreva o que você deseja fazer ou ter..." class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
       </div>
     </div>
 
-    <div class="flex flex-col gap-4 w-full p-4">
-      <button (click)="addTarefa()" title="addTarefa" [disabled]="!tarefaTitle" class="bg-zinc-300 hover:bg-zinc-47700 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
+    <div class="flex gap-4 w-full p-4 justify-end">
+      <button title="addTarefa" type="button" (click)="cancelarFormulario()" class="w-2/9 bg-zinc-300 hover:bg-zinc-400 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
+        Cancelar
+      </button>
+      <button title="addTarefa" type="button" (click)="addTarefa()" [disabled]="!formulario.valid" class=" w-2/9  bg-zinc-400 hover:bg-zinc-500 hover:text-zinc-800 text-zinc-700 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
         Adiconar tarefa
       </button>
     </div>
-  </div>
+  </form>
 
-  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex justify-center gap-4 p-4" *ngIf="tarefas.length > 0">
+  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex justify-center gap-4 p-4 mb-4" *ngIf="tarefas.length > 0">
     <ol class="w-full p-4">
-        <li *ngFor="let tarefa of tarefas; let i = index" class=" p-4 mb-4">
-          <h2>
-            {{ tarefa.title }}
-          </h2>
+        <li *ngFor="let tarefa of tarefas; let i = index" class="flex flex-col gap-4 mb-4 p-4">
+          <div class="flex justify-between items-center bg-zinc-300 p-4 rounded-md shadow-md">
+            <h2 class="text-2xl font-bold text-heading tracking-wide">
+              {{ tarefa.title }}
+            </h2>
+            <h3 class="text-lg font-semibold text-heading text-end">
+              {{ tarefa.dataCriation }}
+            </h3>
+          </div>
           <p>
-            {{ tarefa.description}}
+            {{ tarefa.description }}
           </p>
         </li>
     </ol>
