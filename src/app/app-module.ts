@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Home } from './pages/home/home';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],

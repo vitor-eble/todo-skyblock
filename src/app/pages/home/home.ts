@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from '../../shared/models/tarefa';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,11 @@ export class Home {
   tarefaTitle: string = '';
   tarefaDescription: string = '';
   dataCriation!: number;
+
+  mostrarTarefa: boolean = false;
+
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   tarefas: Tarefa[] = [];
   formulario!: FormGroup;
@@ -45,5 +50,9 @@ export class Home {
   cancelarFormulario(){
     this.formulario.reset();
   }
+
+  verTarefa(verTarefa: Tarefa){
+    this.mostrarTarefa = !this.mostrarTarefa;
+  } 
 
 }
