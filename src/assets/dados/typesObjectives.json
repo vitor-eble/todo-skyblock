@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "mining"
+  },
+  {
+    "id": "2",
+    "name": "blaze"
+  },
+  {
+    "id": "3",
+    "name": "eman"
+  },
+  {
+    "id": "4",
+    "name": "fishing"
+  },
+  {
+    "id": "5",
+    "name": "farming"
+  },
+  {
+    "id": "6",
+    "name": "mp"
+  }
+]

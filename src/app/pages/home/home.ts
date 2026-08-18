@@ -3,6 +3,7 @@ import { Tarefa } from '../../shared/models/tarefa';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -53,6 +54,6 @@ export class Home {
 
   verTarefa(verTarefa: Tarefa){
     this.mostrarTarefa = !this.mostrarTarefa;
-  } 
+  }
 
 }

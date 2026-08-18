@@ -33,8 +33,17 @@
     </div>
   </form>
 
-  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex justify-center gap-4 p-4 mb-4" *ngIf="tarefas.length > 0">
-    <ol class="w-full p-4">
+  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-2 p-4 mb-4">
+
+    <div class="flex gap-1 w-full justify-center bg-red-500 ">
+      <button>
+        <span>
+          mining
+        </span>
+      </button>
+    </div>
+
+    <ol class="w-full" *ngIf="tarefas.length > 0">
         <li *ngFor="let tarefa of tarefas; let i = index" class="flex flex-col p-4">
           <div class="flex justify-between items-center bg-zinc-300 p-4 rounded-md shadow-md"
           [ngClass]="{'rounded-b-none': mostrarTarefa}"
@@ -46,12 +55,12 @@
               <h3 class="text-lg font-semibold text-heading text-end">
               {{ tarefa.dataCriation }}
               </h3>
-              <fa-icon *ngIf="!mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm" 
+              <fa-icon *ngIf="!mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
               (click)="verTarefa(tarefa)"
               [icon]="faEye"
               >
               </fa-icon>
-              <fa-icon *ngIf="mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm" 
+              <fa-icon *ngIf="mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
               (click)="verTarefa(tarefa)"
               [icon]="faEyeSlash"
               >
