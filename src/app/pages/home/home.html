@@ -24,10 +24,10 @@
     </div>
 
     <div class="flex gap-4 w-full p-4 justify-end">
-      <button title="addTarefa" type="button" (click)="cancelarFormulario()" class="w-2/9 bg-zinc-300 hover:bg-zinc-400 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
+      <button title="cancelarTarefa" type="button" (click)="cancelarFormulario()" class="w-2/9 bg-zinc-300 hover:bg-zinc-400 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
         Cancelar
       </button>
-      <button title="addTarefa" type="button" (click)="addTarefa()" [disabled]="!formulario.valid" class=" w-2/9  bg-zinc-400 hover:bg-zinc-500 hover:text-zinc-800 text-zinc-700 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
+      <button title="addTarefa" type="submit" class=" w-2/9  bg-zinc-400 hover:bg-zinc-500 hover:text-zinc-800 text-zinc-700 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300">
         Adiconar tarefa
       </button>
     </div>
@@ -36,10 +36,14 @@
   <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-2 p-4 mb-4">
 
     <div class="flex gap-1 w-full justify-center bg-red-500 ">
-      <button>
+      <button
+        *ngFor="let tipo of types" type="button" [title]="getTipoNome(tipo.name)">
+        <fa-icon [icon]="typesIcons[tipo.name]" >
+        </fa-icon>
         <span>
-          mining
+          {{ getTipoNome(tipo.name) }}
         </span>
+
       </button>
     </div>
 
@@ -75,13 +79,13 @@
               </span>
             </p>
             <div class="flex gap-4 justify-end mr-2">
-              <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
+              <button type="button" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
                 excluir
               </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
+              <button type="button" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
                 editar
               </button>
-              <button class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
+              <button type="button" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition-colors duration-300">
                 concluir
               </button>
             </div>

@@ -3,4 +3,5 @@ export interface Tarefa {
   title: string;
   description?: string;
   dataCriation?: number;
+  type?: string;
 }
