@@ -8,12 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Input } from './shared/components/input/input';
 
 @NgModule({
-  declarations: [
-    App,
-    Home,
-  ],
+  declarations: [App, Home, Input],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,12 +1,12 @@
-import { App } from './../../app';
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from '../../shared/models/tarefa';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { HttpClient } from '@angular/common/http';
 import { TypeIcon } from '../../shared/models/typeIconModel';
 import { tipoIcons } from '../../shared/icons/typeIcon';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,10 +21,11 @@ export class Home implements OnInit {
   tarefaDescription: string = '';
   dataCriation!: number;
 
-  mostrarTarefa: boolean = false;
+  tarefaAbertaId: number | null = null;
 
   types: TypeIcon[] = [];
   typesIcons: Record<string, IconDefinition> = tipoIcons;
+  types$!: Observable<TypeIcon[]>
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
@@ -35,32 +36,38 @@ export class Home implements OnInit {
   constructor(
     private FB: FormBuilder,
     private http: HttpClient,
-  ) { }
+  ) {
+    this.types$ = this.http.get<TypeIcon[]>('assets/dados/typesObjectives.json');
+  }
 
   ngOnInit() {
     this.formulario = this.FB.group({
       tarefaTitle: [this.tarefaTitle, Validators.required],
       tarefaDescription: [this.tarefaDescription],
       dataCriation: [this.dataCriation, Validators.required]
-    })
+    });
 
-    this.carregarTipos();
-  }
-
-carregarTipos(): void {
-  this.http
-    .get<TypeIcon[]>('assets/dados/typesObjectives.json')
-    .subscribe({
+    this.types$.subscribe({
       next: (data) => {
         this.types = data;
-        console.log('Tipos carregados:', this.types);
-        console.log('Ícones:', this.typesIcons);
-      },
-      error: (error) => {
-        console.error('Erro ao carregar os tipos:', error);
       }
     });
-}
+
+    // this.carregarTipos();
+  }
+
+  // carregarTipos(): void {
+  //   this.http
+  //     .get<TypeIcon[]>('assets/dados/typesObjectives.json')
+  //     .subscribe({
+  //       next: (data) => {
+  //         this.types = data;
+  //       },
+  //       error: (error) => {
+  //         console.error('Erro ao carregar os tipos:', error);
+  //       }
+  //     });
+  // }
 
   getTipoNome(tipo: string): any{
     const nomes: Record<string, string> = {
@@ -88,8 +95,8 @@ carregarTipos(): void {
     this.formulario.reset();
   }
 
-  verTarefa(verTarefa: Tarefa){
-    this.mostrarTarefa = !this.mostrarTarefa;
+  verTarefa(tarefa: Tarefa): void {
+    this.tarefaAbertaId = this.tarefaAbertaId === tarefa.id ? null : tarefa.id;
   }
 
 }

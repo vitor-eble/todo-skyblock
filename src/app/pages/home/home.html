@@ -33,11 +33,11 @@
     </div>
   </form>
 
-  <div class="w-3/4 mx-auto bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center gap-2 p-4 mb-4">
+  <div class="w-3/4 mx-auto pb-4 bg-zinc-50 shadow-lg rounded-lg flex flex-col justify-center mb-4">
 
-    <div class="flex gap-1 w-full justify-center bg-red-500 ">
-      <button
-        *ngFor="let tipo of types" type="button" [title]="getTipoNome(tipo.name)">
+    <div class="flex grow w-full justify-center rounded-md px-4">
+      <button class="flex items-center justify-center py-2 gap-1 mt-2 grow hover:bg-zinc-300 transition-all duration-300 hover:rounded-t-md hover:shadow-md"
+        *ngFor="let tipo of types$ | async" type="button" [title]="getTipoNome(tipo.name)">
         <fa-icon [icon]="typesIcons[tipo.name]" >
         </fa-icon>
         <span>
@@ -47,10 +47,13 @@
       </button>
     </div>
 
+    <span class="w-full h-px bg-zinc-400">
+    </span>
+
     <ol class="w-full" *ngIf="tarefas.length > 0">
         <li *ngFor="let tarefa of tarefas; let i = index" class="flex flex-col p-4">
           <div class="flex justify-between items-center bg-zinc-300 p-4 rounded-md shadow-md"
-          [ngClass]="{'rounded-b-none': mostrarTarefa}"
+          [ngClass]="{'rounded-b-none': tarefaAbertaId === tarefa.id}"
           >
             <h2 class="text-2xl font-bold text-heading tracking-wide">
               {{ tarefa.title }}
@@ -59,19 +62,19 @@
               <h3 class="text-lg font-semibold text-heading text-end">
               {{ tarefa.dataCriation }}
               </h3>
-              <fa-icon *ngIf="!mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
+              <fa-icon *ngIf="tarefaAbertaId !== tarefa.id" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
               (click)="verTarefa(tarefa)"
               [icon]="faEye"
               >
               </fa-icon>
-              <fa-icon *ngIf="mostrarTarefa" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
+              <fa-icon *ngIf="tarefaAbertaId === tarefa.id" class="w-8 h-8 flex justify-center items-center border-2 hover:border-zinc-600 hover:bg-zinc-500 transition-all duration-300 border-zinc-500 bg-zinc-400 rounded-sm shadow-sm"
               (click)="verTarefa(tarefa)"
               [icon]="faEyeSlash"
               >
               </fa-icon>
             </div>
           </div>
-          <div *ngIf="mostrarTarefa" class="text-lg font-normal border-2 border-zinc-300 flex flex-col gap-8 rounded-b-md p-4 shadow-md">
+          <div *ngIf="tarefaAbertaId === tarefa.id" class="text-lg font-normal border-2 border-zinc-300 flex flex-col gap-8 rounded-b-md p-4 shadow-md">
             <p class="flex flex-col">
               <span class="font-light text-sm">Descrição:</span>
               <span class="font-normal text-base pl-2">
