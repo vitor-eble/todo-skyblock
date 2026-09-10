@@ -1,6 +1,5 @@
 .scrollbar-hide {
   -ms-overflow-style: none;  /* Internet Explorer e Edge antigo */
-  scrollbar-width: none;     /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {

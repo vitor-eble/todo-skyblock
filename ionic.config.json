@@ -1,0 +1,7 @@
+{
+  "name": "todo-skyblock",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

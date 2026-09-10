@@ -9,9 +9,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Input } from './shared/components/input/input';
+import { Login } from './pages/login/login';
+
 
 @NgModule({
-  declarations: [App, Home, Input],
+  declarations: [App, Home, Input, Login],
   imports: [
     BrowserModule,
     AppRoutingModule,
