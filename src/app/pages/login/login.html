@@ -1,10 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Teste</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="">
+  <div class=" h-dvh flex flex-col justify-center items-center bg-zinc-100 p-4">
+    <div class="border-2 border-zinc-400 rounded-md shadow-md flex flex-col justify-center items-center bg-white w-full gap-2 p-4">
+      <ion-header [translucent]="true" class="ion-no-border">
+        <ion-toolbar>
+          <ion-title class="text-2xl font-bold text-heading tracking-wide">
+            Login
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-<ion-content>
-  <ion-button>Default</ion-button>
-  <ion-input label="Default input" class=""></ion-input>
+      <form  class="flex flex-col gap-4">
+        <ion-item class="w-full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+
+        <!-- <div class="flex w-full flex-col gap-1">
+        <label for="inputDescription" class="block text-xl font-semibold text-heading">Descrição</label>
+        <input type="text" title="inputDescription" formControlName="tarefaDescription" placeholder="descreva o que você deseja fazer ou ter..." class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
+        </div> -->
+
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+
+        <div class="flex justify-center">
+          <button expand="block" type="submit" [disabled]="" class="p-4 w-full bg-zinc-500 text-white font-semibold rounded-md shadow-md hover:bg-zinc-900 transition-all duration-300">
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </ion-content>
+
+

@@ -1,5 +1,6 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideBrowserGlobalErrorListeners, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideIonicAngular, IonContent } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -11,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Input } from './shared/components/input/input';
 import { Login } from './pages/login/login';
 
-
 @NgModule({
   declarations: [App, Home, Input, Login],
   imports: [
@@ -22,8 +22,10 @@ import { Login } from './pages/login/login';
     FontAwesomeModule,
     CommonModule,
     HttpClientModule,
-  ],
-  providers: [provideBrowserGlobalErrorListeners()],
+    IonContent
+],
+  providers: [provideBrowserGlobalErrorListeners(), provideIonicAngular()],
   bootstrap: [App],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
