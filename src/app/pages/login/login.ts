@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -6,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {}
+export class Login {
+  faEnvelope = faEnvelope;
+
+  constructor(private faIconLibrary: FaIconLibrary) {
+    this.faIconLibrary.addIcons(faEnvelope);
+  }
+}

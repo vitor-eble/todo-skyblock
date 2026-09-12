@@ -1,6 +1,6 @@
 import { NgModule, provideBrowserGlobalErrorListeners, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideIonicAngular, IonContent } from '@ionic/angular';
+import { provideIonicAngular } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -22,8 +22,7 @@ import { Login } from './pages/login/login';
     FontAwesomeModule,
     CommonModule,
     HttpClientModule,
-    IonContent
-],
+  ],
   providers: [provideBrowserGlobalErrorListeners(), provideIonicAngular()],
   bootstrap: [App],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

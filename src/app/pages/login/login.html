@@ -1,32 +1,43 @@
 <ion-content class="">
-  <div class=" h-dvh flex flex-col justify-center items-center bg-zinc-100 p-4">
+  <div class="h-dvh flex flex-col justify-center items-center bg-zinc-100 p-4">
     <div class="border-2 border-zinc-400 rounded-md shadow-md flex flex-col justify-center items-center bg-white w-full gap-2 p-4">
       <ion-header [translucent]="true" class="ion-no-border">
         <ion-toolbar>
-          <ion-title class="text-2xl font-bold text-heading tracking-wide">
+          <ion-title class="text-2xl font-bold text-heading tracking-wide px-2">
             Login
           </ion-title>
         </ion-toolbar>
       </ion-header>
 
-      <form  class="flex flex-col gap-4">
-        <ion-item class="w-full">
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" formControlName="email"></ion-input>
-        </ion-item>
+      <form class="flex flex-col gap-4">
+        <div>
+          <label
+            for="visitors"
+            class="flex items-center gap-2 border-zinc-300 border-2 text-sm rounded-sm w-full p-4 shadow-xs text-zinc-700 focus-within:ring-2 focus-within:ring-zinc-500"
+          >
+            <fa-icon [icon]="faEnvelope" class="text-zinc-400"></fa-icon>
+            <input
+              type="text"
+              id="visitors"
+              class="w-full outline-none placeholder:text-sm placeholder:text-zinc-400"
+              placeholder="exemplo@mail.com"
+              required
+            />
+          </label>
+        </div>
 
-        <!-- <div class="flex w-full flex-col gap-1">
-        <label for="inputDescription" class="block text-xl font-semibold text-heading">Descrição</label>
-        <input type="text" title="inputDescription" formControlName="tarefaDescription" placeholder="descreva o que você deseja fazer ou ter..." class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300">
-        </div> -->
+        <div>
+          <label for="visitors" class="block text-sm font-medium text-heading">Email</label>
+          <input type="text" id="visitors" class="border-zinc-300 border-b text-heading text-sm block w-full px-2.5 py-3 placeholder:text-body focus:outline-none" placeholder="" required />
+        </div>
 
         <ion-item>
           <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
+          <ion-input type="password"></ion-input>
         </ion-item>
 
         <div class="flex justify-center">
-          <button expand="block" type="submit" [disabled]="" class="p-4 w-full bg-zinc-500 text-white font-semibold rounded-md shadow-md hover:bg-zinc-900 transition-all duration-300">
+          <button type="submit" class="p-4 w-full bg-zinc-500 text-white font-semibold rounded-md shadow-md hover:bg-zinc-900 transition-all duration-300">
             Login
           </button>
         </div>

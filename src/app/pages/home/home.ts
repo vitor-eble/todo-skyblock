@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from '../../shared/models/tarefa';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { HttpClient } from '@angular/common/http';
 import { TypeIcon } from '../../shared/models/typeIconModel';
 import { tipoIcons } from '../../shared/icons/typeIcon';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 
 
@@ -36,7 +37,9 @@ export class Home implements OnInit {
   constructor(
     private FB: FormBuilder,
     private http: HttpClient,
+    private faIconLibrary: FaIconLibrary,
   ) {
+    this.faIconLibrary.addIcons(faEye, faEyeSlash, ...Object.values(tipoIcons));
     this.types$ = this.http.get<TypeIcon[]>('assets/dados/typesObjectives.json');
   }
 
