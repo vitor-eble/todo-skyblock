@@ -1,4 +1,8 @@
-import { NgModule, provideBrowserGlobalErrorListeners, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  provideBrowserGlobalErrorListeners,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideIonicAngular } from '@ionic/angular';
 
@@ -9,11 +13,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Input } from './shared/components/input/input';
 import { Login } from './pages/login/login';
+import { InputComponent } from './shared/components/input-component/input-component';
 
 @NgModule({
-  declarations: [App, Home, Input, Login],
+  declarations: [App, Home, Login, InputComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

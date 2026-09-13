@@ -1,5 +1,5 @@
 <ion-content class="">
-  <div class="h-dvh flex flex-col justify-center items-center bg-zinc-100 p-4">
+  <div class="h-dvh flex flex-col justify-center items-center  bg-zinc-100 p-4">
     <div class="border-2 border-zinc-400 rounded-md shadow-md flex flex-col justify-center items-center bg-white w-full gap-2 p-4">
       <ion-header [translucent]="true" class="ion-no-border">
         <ion-toolbar>
@@ -9,41 +9,45 @@
         </ion-toolbar>
       </ion-header>
 
-      <form class="flex flex-col gap-4">
-        <div>
-          <label
-            for="visitors"
-            class="flex items-center gap-2 border-zinc-300 border-2 text-sm rounded-sm w-full p-4 shadow-xs text-zinc-700 focus-within:ring-2 focus-within:ring-zinc-500"
+      <form class="flex flex-col mt-4">
+
+        <div class="flex flex-col gap-4">
+          <app-input-component
+            tipe="text"
+            title="Email"
+            placeholder="exemplo@gmail.com"
+            [icon]="faEnvelope"
           >
-            <fa-icon [icon]="faEnvelope" class="text-zinc-400"></fa-icon>
-            <input
-              type="text"
-              id="visitors"
-              class="w-full outline-none placeholder:text-sm placeholder:text-zinc-400"
-              placeholder="exemplo@mail.com"
-              required
-            />
-          </label>
+          </app-input-component>
+
+          <app-input-component
+            tipe="password"
+            title="senha"
+            placeholder="senha"
+            [icon]="faLock"
+            ariaLabel="senha"
+          >
+          </app-input-component>
+        </div>
+        
+        <div class="flex justify-end text-sm text-zinc-500 mt-2 mb-4">
+          esqueceu a senha?
         </div>
 
-        <div>
-          <label for="visitors" class="block text-sm font-medium text-heading">Email</label>
-          <input type="text" id="visitors" class="border-zinc-300 border-b text-heading text-sm block w-full px-2.5 py-3 placeholder:text-body focus:outline-none" placeholder="" required />
-        </div>
-
-        <ion-item>
-          <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-
-        <div class="flex justify-center">
+        <div class="flex justify-center my-4">
           <button type="submit" class="p-4 w-full bg-zinc-500 text-white font-semibold rounded-md shadow-md hover:bg-zinc-900 transition-all duration-300">
             Login
           </button>
         </div>
       </form>
     </div>
+    <span class="text-sm text-zinc-500 mt-4">
+      nao tem uma conta?
+      <a href="" class="text-zinc-900 font-semibold hover:underline">
+        cadastre-se 
+      </a>
+    </span>
   </div>
 </ion-content>
-
+  
 
