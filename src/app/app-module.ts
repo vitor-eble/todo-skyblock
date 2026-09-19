@@ -15,9 +15,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Login } from './pages/login/login';
 import { InputComponent } from './shared/components/input-component/input-component';
+import { MenuLateral } from './shared/components/menu-lateral/menu-lateral';
 
 @NgModule({
-  declarations: [App, Home, Login, InputComponent],
+  declarations: [App, Home, Login, InputComponent, MenuLateral],
   imports: [
     BrowserModule,
     AppRoutingModule,

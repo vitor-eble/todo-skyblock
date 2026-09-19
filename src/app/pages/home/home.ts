@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Tarefa } from '../../shared/models/tarefa';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { HttpClient } from '@angular/common/http';
 import { TypeIcon } from '../../shared/models/typeIconModel';
@@ -21,6 +21,7 @@ export class Home implements OnInit {
   tarefaTitle: string = '';
   tarefaDescription: string = '';
   dataCriation!: number;
+  menuAberto: boolean = false;
 
   tarefaAbertaId: number | null = null;
 
@@ -30,6 +31,8 @@ export class Home implements OnInit {
 
   faEye = faEye;
   faEyeSlash = faEyeSlash;
+  faPlus = faPlus;
+  faBars = faBars;
 
   tarefas: Tarefa[] = [];
   formulario!: FormGroup;
@@ -38,8 +41,9 @@ export class Home implements OnInit {
     private FB: FormBuilder,
     private http: HttpClient,
     private faIconLibrary: FaIconLibrary,
+    private cdr: ChangeDetectorRef,
   ) {
-    this.faIconLibrary.addIcons(faEye, faEyeSlash, ...Object.values(tipoIcons));
+    this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus);
     this.types$ = this.http.get<TypeIcon[]>('assets/dados/typesObjectives.json');
   }
 
@@ -52,7 +56,14 @@ export class Home implements OnInit {
 
     this.types$.subscribe({
       next: (data) => {
+        console.log('Tipos carregados com sucesso:', data);
         this.types = data;
+        // forçar detecção de mudanças para atualizar a view (ícones e lista)
+        try {
+          this.cdr.detectChanges();
+        } catch (e) {
+          // detectChanges pode lançar se já estivermos no ciclo de detecção; ignore nesse caso
+        }
       }
     });
 
@@ -101,5 +112,9 @@ export class Home implements OnInit {
   verTarefa(tarefa: Tarefa): void {
     this.tarefaAbertaId = this.tarefaAbertaId === tarefa.id ? null : tarefa.id;
   }
+
+  toggleMenu(): void {
+    this.menuAberto = !this.menuAberto;
+  } 
 
 }
