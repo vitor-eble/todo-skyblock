@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
 import { faXmark, faGear } from '@fortawesome/free-solid-svg-icons';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
+import { Observable } from 'rxjs';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { TypeIcon } from '../../models/typeIconModel';
+import { tipoIcons } from '../../icons/typeIcon';
+import { TypesObjectives } from '../../services/types-objectives';
 
 
 @Component({
@@ -13,8 +20,47 @@ export class MenuLateral {
   @Input() menuAberto: boolean = false;
   @Output() fecharMenu = new EventEmitter<void>();
 
+  types: TypeIcon[] = [];
+  typesIcons: Record<string, IconDefinition> = tipoIcons;
+  types$!: Observable<TypeIcon[]>
+
   faXmark = faXmark;
   faGear = faGear;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private typesObjectivesService: TypesObjectives,
+    private faIconLibrary: FaIconLibrary,
+  ){
+    this.faIconLibrary.addIcons(faXmark, faGear);
+    this.types$ = this.typesObjectivesService.getTypesObjectives();
+  }
+
+  ngOnInit(){
+    this.types$.subscribe({
+      next: (data) => {
+        console.log('Tipos carregados com sucesso:', data);
+        this.types = data;
+        try {
+          this.cdr.detectChanges();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    });
+  }
+
+    getTipoNome(tipo: string): any{
+    const nomes: Record<string, string> = {
+      mining: 'Mining',
+      blaze: 'Blaze slayer',
+      eman: 'Eman slayer',
+      fishing: 'Fishing',
+      farming: 'Farming',
+      mp: 'Magical Power',
+    };
+    return nomes[tipo] ?? tipo;
+  }
 
   fechar(){
     this.fecharMenu.emit();

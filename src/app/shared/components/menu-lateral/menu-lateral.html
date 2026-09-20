@@ -18,6 +18,18 @@
 
             <div class="flex flex-col gap-2">
                 <h3 class="text-lg font-semibold text-heading">Objetivos</h3>
+                <div>
+                    <button class="flex shrink-0 items-center justify-center py-2 px-4 gap-1 mt-2 hover:bg-zinc-300 transition-all duration-300 hover:rounded-t-md hover:shadow-md"
+                    *ngFor="let tipo of types"
+                    type="button"
+                    [title]="getTipoNome(tipo.name)"
+                    >
+                        <fa-icon [icon]="typesIcons[tipo.name]"> </fa-icon>
+                        <span>
+                            {{ getTipoNome(tipo.name) }}
+                        </span>
+                    </button>
+                </div>
             </div>
 
         </div>

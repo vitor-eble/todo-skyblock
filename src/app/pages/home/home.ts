@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faEye, faEyeSlash, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { HttpClient } from '@angular/common/http';
-import { TypeIcon } from '../../shared/models/typeIconModel';
-import { tipoIcons } from '../../shared/icons/typeIcon';
+import { TypesObjectives } from './../../shared/services/types-objectives';
+
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 
@@ -25,10 +25,6 @@ export class Home implements OnInit {
 
   tarefaAbertaId: number | null = null;
 
-  types: TypeIcon[] = [];
-  typesIcons: Record<string, IconDefinition> = tipoIcons;
-  types$!: Observable<TypeIcon[]>
-
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   faPlus = faPlus;
@@ -39,12 +35,10 @@ export class Home implements OnInit {
 
   constructor(
     private FB: FormBuilder,
-    private http: HttpClient,
     private faIconLibrary: FaIconLibrary,
     private cdr: ChangeDetectorRef,
   ) {
-    this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus);
-    this.types$ = this.http.get<TypeIcon[]>('assets/dados/typesObjectives.json');
+    this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus, faBars);
   }
 
   ngOnInit() {
@@ -54,44 +48,11 @@ export class Home implements OnInit {
       dataCriation: [this.dataCriation, Validators.required]
     });
 
-    this.types$.subscribe({
-      next: (data) => {
-        console.log('Tipos carregados com sucesso:', data);
-        this.types = data;
-        // forçar detecção de mudanças para atualizar a view (ícones e lista)
-        try {
-          this.cdr.detectChanges();
-        } catch (e) {
+    try {
+      this.cdr.detectChanges();
+    } catch (e) {
           // detectChanges pode lançar se já estivermos no ciclo de detecção; ignore nesse caso
-        }
-      }
-    });
-
-    // this.carregarTipos();
-  }
-
-  // carregarTipos(): void {
-  //   this.http
-  //     .get<TypeIcon[]>('assets/dados/typesObjectives.json')
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.types = data;
-  //       },
-  //       error: (error) => {
-  //         console.error('Erro ao carregar os tipos:', error);
-  //       }
-  //     });
-  // }
-
-  getTipoNome(tipo: string): any{
-    const nomes: Record<string, string> = {
-      mining: 'Mining',
-      blaze: 'Blaze slayer',
-      eman: 'Eman slayer',
-      fishing: 'Fishing',
-      mp: 'Magical Power',
-    };
-    return nomes[tipo] ?? tipo;
+    }
   }
 
   addTarefa(){
