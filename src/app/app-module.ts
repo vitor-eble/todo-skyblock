@@ -16,9 +16,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { Login } from './pages/login/login';
 import { InputComponent } from './shared/components/input-component/input-component';
 import { MenuLateral } from './shared/components/menu-lateral/menu-lateral';
+import { Mining } from './pages/mining/mining';
+import { Blaze } from './pages/blaze/blaze';
+import { Eman } from './pages/eman/eman';
+import { Fishing } from './pages/fishing/fishing';
+import { Farming } from './pages/farming/farming';
 
 @NgModule({
-  declarations: [App, Home, Login, InputComponent, MenuLateral],
+  declarations: [
+    App,
+    Home,
+    Login,
+    InputComponent,
+    MenuLateral,
+    Mining,
+    Blaze,
+    Eman,
+    Fishing,
+    Farming,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

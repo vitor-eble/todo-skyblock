@@ -19,6 +19,7 @@ export class MenuLateral {
 
   @Input() menuAberto: boolean = false;
   @Output() fecharMenu = new EventEmitter<void>();
+  @Output() tipoObjetivoSelecionado = new EventEmitter<string>();
 
   types: TypeIcon[] = [];
   typesIcons: Record<string, IconDefinition> = tipoIcons;
@@ -50,7 +51,7 @@ export class MenuLateral {
     });
   }
 
-    getTipoNome(tipo: string): any{
+  getTipoNome(tipo: string): any{
     const nomes: Record<string, string> = {
       mining: 'Mining',
       blaze: 'Blaze slayer',
@@ -60,6 +61,10 @@ export class MenuLateral {
       mp: 'Magical Power',
     };
     return nomes[tipo] ?? tipo;
+  }
+
+  selecionarTipoObjetivo(tipo: TypeIcon){
+    this.tipoObjetivoSelecionado.emit(tipo.name)
   }
 
   fechar(){

@@ -1,22 +1,27 @@
 [
   {
     "id": "1",
-    "name": "mining"
+    "name": "mining",
+    "route": "mining"
   },
   {
     "id": "2",
-    "name": "blaze"
+    "name": "blaze",
+    "route": "blaze"
   },
   {
     "id": "3",
-    "name": "eman"
+    "name": "eman",
+    "route":"eman"
   },
   {
     "id": "4",
-    "name": "fishing"
+    "name": "fishing",
+    "route":"fishing"
   },
   {
     "id": "5",
-    "name": "farming"
+    "name": "farming",
+    "route":"farming"
   }
 ]

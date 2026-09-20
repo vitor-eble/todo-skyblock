@@ -11,8 +11,9 @@
   </ion-header>
 
   <app-menu-lateral
-  (fecharMenu)="menuAberto = false"
+    (fecharMenu)="menuAberto = false"
     [menuAberto]="menuAberto"
+    (tipoObjetivoSelecionado)="abrirTipo($event)"
   >
   </app-menu-lateral>
 
@@ -85,19 +86,14 @@
           </button>
         </div>
       </form>
+      <router-outlet></router-outlet>
 
-      <div
+      <div *ngIf="tarefas.length > 0"
         class="w-3/4 mx-auto pb-4 bg-red-50 shadow-lg rounded-lg flex flex-col justify-center mb-4"
       >
-        <div class="flex w-full overflow-x-auto rounded-md px-4 scrollbar-hide">
-          <div class="flex gap-4 w-full py-2 justify-center">
-           
-          </div>
-        </div>
-
         <span class="w-full h-px bg-zinc-400"> </span>
 
-        <ol class="w-full" *ngIf="tarefas.length > 0">
+        <ol class="w-full" >
           <li *ngFor="let tarefa of tarefas; let i = index" class="flex flex-col p-4">
             <div
               class="flex justify-between items-center bg-zinc-300 p-4 rounded-md shadow-md"

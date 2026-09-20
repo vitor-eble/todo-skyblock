@@ -8,6 +8,7 @@ import { TypesObjectives } from './../../shared/services/types-objectives';
 
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class Home implements OnInit {
     private FB: FormBuilder,
     private faIconLibrary: FaIconLibrary,
     private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus, faBars);
   }
@@ -64,6 +66,11 @@ export class Home implements OnInit {
       dataCriation: this.formulario.get('dataCriation')?.value,
     })
     this.formulario.reset();
+  }
+
+  abrirTipo(tipo: string): any{
+    this.router.navigate(['/home',tipo.toLowerCase()])
+    this.menuAberto = false
   }
 
   cancelarFormulario(){
