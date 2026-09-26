@@ -1,0 +1,17 @@
+<div class="fixed inset-0 bg-black/40 z-40" *ngIf="criarObjetivoModal">
+    <div class="bg-zinc-100 min-h-full" (click)="$event.stopPropagation()">
+        <ion-header>
+            <ion-toolbar>
+                <span class="w-full gap-8 flex justify-between">
+                    <ion-buttons slot="start">
+                        <ion-button (click)="fecharModal()">Cancelar</ion-button>
+                    </ion-buttons>
+                    <ion-title class="text-2xl font-semibold tracking-wide">Criar Objetivo</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button [strong]="true">Criar</ion-button>
+                    </ion-buttons>
+                </span>
+            </ion-toolbar>
+        </ion-header>
+    </div>
+</div>

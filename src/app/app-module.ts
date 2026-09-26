@@ -4,7 +4,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideIonicAngular } from '@ionic/angular';
+import { provideIonicAngular, IonAccordion } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -21,6 +21,7 @@ import { Blaze } from './pages/blaze/blaze';
 import { Eman } from './pages/eman/eman';
 import { Fishing } from './pages/fishing/fishing';
 import { Farming } from './pages/farming/farming';
+import { CriarObjetivo } from './shared/components/criar-objetivo/criar-objetivo';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { Farming } from './pages/farming/farming';
     Eman,
     Fishing,
     Farming,
+    CriarObjetivo,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { Farming } from './pages/farming/farming';
     FontAwesomeModule,
     CommonModule,
     HttpClientModule,
-  ],
+    IonAccordion
+],
   providers: [provideBrowserGlobalErrorListeners(), provideIonicAngular()],
   bootstrap: [App],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

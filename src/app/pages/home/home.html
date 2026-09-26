@@ -5,7 +5,7 @@
         <button aria-label="open-menu" type-button (click)="toggleMenu()">
           <fa-icon [icon]="faBars" class="text-3xl text-heading px-4"></fa-icon>
         </button>
-        <ion-title class="text-2xl font-semibold text-heading ">Skyblock To-do</ion-title>
+        <ion-title class="text-2xl font-semibold  tracking-wide">SkyTrack</ion-title>
       </span>
     </ion-toolbar>
   </ion-header>
@@ -16,6 +16,12 @@
     (tipoObjetivoSelecionado)="abrirTipo($event)"
   >
   </app-menu-lateral>
+
+  <app-criar-objetivo
+  (fecharModalObjetivo)="criarObjetivoModal = false"
+  [criarObjetivoModal]="criarObjetivoModal"
+  >
+  </app-criar-objetivo>
 
   <ion-content [fullscreen]="true" class="ion-padding overflow-y-auto flex-1">
     <div class="p-4 min-h-full bg-zinc-100">
@@ -161,8 +167,8 @@
   <ion-footer class="py-3">
     <ion-toolbar>
       <div class="flex justify-around items-center w-full">
-        <button aria-label="open-modal" type="button"
-          class="bg-zinc-500 hover:bg-zinc-600 text-white font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300"
+        <button aria-label="open-modal" type="button" (click)="toggleModal()"
+          class="bg-zinc-500 active:bg-zinc-600 text-white font-semibold flex justify-center items-center h-14 w-14 rounded-full  transition-all duration-300"
         >
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>

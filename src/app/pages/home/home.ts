@@ -23,6 +23,7 @@ export class Home implements OnInit {
   tarefaDescription: string = '';
   dataCriation!: number;
   menuAberto: boolean = false;
+  criarObjetivoModal: boolean = false
 
   tarefaAbertaId: number | null = null;
 
@@ -84,5 +85,9 @@ export class Home implements OnInit {
   toggleMenu(): void {
     this.menuAberto = !this.menuAberto;
   } 
+
+  toggleModal(): void {
+    this.criarObjetivoModal = !this.criarObjetivoModal
+  }
 
 }
