@@ -24,83 +24,28 @@
   </app-criar-objetivo>
 
   <ion-content [fullscreen]="true" class="ion-padding overflow-y-auto flex-1">
-    <div class="p-4 min-h-full bg-zinc-100">
-      <form
-        (ngSubmit)="addTarefa()"
-        [formGroup]="formulario"
-        class="mx-auto bg-white shadow-lg rounded-lg flex flex-col justify-center gap-4 border-2 border-zinc-400"
-      >
-        <div class="flex flex-col gap-4 w-full p-4">
-          <div class="flex gap-8 w-full">
-            <div class="flex flex-col gap-1 w-1/2">
-              <label for="inputTitle" class="block text-xl font-semibold text-heading"
-                >Titulo</label
-              >
-              <input
-                label="Titulo"
-                type="text"
-                title="inputTitle"
-                id="inputTitle"
-                formControlName="tarefaTitle"
-                placeholder="item ou objetivo"
-                class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-              />
-            </div>
-            <div class="flex flex-col gap-1 w-1/2">
-              <label for="inputDataCriation" class="block text-xl font-semibold text-heading"
-                >Data de criação</label
-              >
-              <ion-datepicker
-                title="inputDataCriation"
-                id="inputDataCriation"
-                formControlName="dataCriation"
-                class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-              >
-              </ion-datepicker>
-            </div>
-          </div>
 
-          <div class="flex w-full flex-col gap-1">
-            <label for="inputDescription" class="block text-xl font-semibold text-heading"
-              >Descrição</label
-            >
-            <input
-              type="text"
-              title="inputDescription"
-              formControlName="tarefaDescription"
-              placeholder="descreva o que você deseja fazer ou ter..."
-              class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-            />
-          </div>
-        </div>
+    <div class="p-4 min-h-full bg-zinc-100 flex flex-col gap-4">
+      <div class="flex flex-col gap-2 w-full mb-4">
+        <h2 class="text-lg font-semibold text-heading">Seus objetivos. Seu progresso.</h2>
+        <p class="tracking-wide text-base font-light text-zinc-600">
+          Tenha seus objetivos do Hypixel SkyBlock organizados em um só lugar. <br>
+          Crie tarefas, acompanhe seu progresso e mantenha uma visão clara do que ainda falta para alcançar seus objetivos.</p>
+      </div>
 
-        <div class="flex gap-4 w-full p-4 justify-end">
-          <button
-            title="cancelarTarefa"
-            type="button"
-            (click)="cancelarFormulario()"
-            class="w-2/9 bg-zinc-300 hover:bg-zinc-400 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300"
-          >
-            Cancelar
-          </button>
-          <button
-            title="addTarefa"
-            type="submit"
-            class="w-2/9 bg-zinc-400 hover:bg-zinc-500 hover:text-zinc-800 text-zinc-700 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300"
-          >
-            Adiconar tarefa
-          </button>
-        </div>
-      </form>
       <router-outlet></router-outlet>
 
-      <div *ngIf="tarefas.length > 0"
-        class="w-3/4 mx-auto pb-4 bg-red-50 shadow-lg rounded-lg flex flex-col justify-center mb-4"
+      <div
+        class="mx-auto pb-4 flex flex-col justify-center mb-4 gap-4 w-full max-w-3xl"
       >
-        <span class="w-full h-px bg-zinc-400"> </span>
+        <div class="flex w-full gap-4 items-center">
+          <span class="shrink-0 text-lg font-medium tracking-wide">Ultimas tarefas</span>
+          <span class="h-0.5 w-full bg-zinc-400 block"></span>
+        </div>
+        <!-- <span class="w-full h-px bg-zinc-400"> </span> -->
 
-        <ol class="w-full" >
-          <li *ngFor="let tarefa of tarefas; let i = index" class="flex flex-col p-4">
+        <ol class="w-full flex flex-col gap-4" *ngIf="tarefas$ | async as tarefas;">
+          <li *ngFor="let tarefa of (tarefas$ | async)?.slice(0,10); let i = index" class="flex flex-col">
             <div
               class="flex justify-between items-center bg-zinc-300 p-4 rounded-md shadow-md"
               [ngClass]="{ 'rounded-b-none': tarefaAbertaId === tarefa.id }"
@@ -140,6 +85,7 @@
               </p>
               <div class="flex gap-4 justify-end mr-2">
                 <button
+                  (click)="excluirObjetivo(tarefa.id)"
                   type="button"
                   class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors duration-300"
                 >
@@ -164,9 +110,9 @@
       </div>
     </div>
   </ion-content>
-  <ion-footer class="py-3">
+  <ion-footer class="py-3 fixed bottom-0">
     <ion-toolbar>
-      <div class="flex justify-around items-center w-full">
+      <div class="flex justify-around items-center w-full fixed bottom-0">
         <button aria-label="open-modal" type="button" (click)="toggleModal()"
           class="bg-zinc-500 active:bg-zinc-600 text-white font-semibold flex justify-center items-center h-14 w-14 rounded-full  transition-all duration-300"
         >

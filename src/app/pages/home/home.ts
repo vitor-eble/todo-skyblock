@@ -9,6 +9,7 @@ import { TypesObjectives } from './../../shared/services/types-objectives';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { CriarTarefa } from '../../shared/services/criar-tarefa';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class Home implements OnInit {
   dataCriation!: number;
   menuAberto: boolean = false;
   criarObjetivoModal: boolean = false
+  tarefas$: Observable<Tarefa[]>;
 
   tarefaAbertaId: number | null = null;
 
@@ -32,25 +34,17 @@ export class Home implements OnInit {
   faPlus = faPlus;
   faBars = faBars;
 
-  tarefas: Tarefa[] = [];
-  formulario!: FormGroup;
-
   constructor(
-    private FB: FormBuilder,
     private faIconLibrary: FaIconLibrary,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private criarTarefa: CriarTarefa,
   ) {
     this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus, faBars);
+    this.tarefas$ = this.criarTarefa.tarefas$;
   }
 
   ngOnInit() {
-    this.formulario = this.FB.group({
-      tarefaTitle: [this.tarefaTitle, Validators.required],
-      tarefaDescription: [this.tarefaDescription],
-      dataCriation: [this.dataCriation, Validators.required]
-    });
-
     try {
       this.cdr.detectChanges();
     } catch (e) {
@@ -58,33 +52,22 @@ export class Home implements OnInit {
     }
   }
 
-  addTarefa(){
-    console.log('click');
-    this.tarefas.push({
-      id: this.tarefas.length + 1,
-      title: this.formulario.get('tarefaTitle')?.value,
-      description: this.formulario.get('tarefaDescription')?.value,
-      dataCriation: this.formulario.get('dataCriation')?.value,
-    })
-    this.formulario.reset();
-  }
-
   abrirTipo(tipo: string): any{
     this.router.navigate(['/home',tipo.toLowerCase()])
     this.menuAberto = false
-  }
-
-  cancelarFormulario(){
-    this.formulario.reset();
   }
 
   verTarefa(tarefa: Tarefa): void {
     this.tarefaAbertaId = this.tarefaAbertaId === tarefa.id ? null : tarefa.id;
   }
 
+  excluirObjetivo(id: number): void {
+    this.criarTarefa.deletarObjetivo(id);
+  }
+
   toggleMenu(): void {
     this.menuAberto = !this.menuAberto;
-  } 
+  }
 
   toggleModal(): void {
     this.criarObjetivoModal = !this.criarObjetivoModal

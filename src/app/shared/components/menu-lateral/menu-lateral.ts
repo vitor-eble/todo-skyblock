@@ -40,7 +40,6 @@ export class MenuLateral {
   ngOnInit(){
     this.types$.subscribe({
       next: (data) => {
-        console.log('Tipos carregados com sucesso:', data);
         this.types = data;
         try {
           this.cdr.detectChanges();

@@ -9,10 +9,10 @@ export class TypesObjectives {
     typesObjectives = 'assets/dados/typesObjectives.json'
 
     constructor(
-        private http: HttpClient
+       private http: HttpClient
     ) { }
 
     getTypesObjectives(): Observable<TypeIcon[]> {
-        return this.http.get<any>(this.typesObjectives)
+      return this.http.get<any>(this.typesObjectives)
     }
 }
