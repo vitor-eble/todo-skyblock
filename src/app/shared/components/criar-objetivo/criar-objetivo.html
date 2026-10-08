@@ -14,71 +14,59 @@
         </ion-header>
     <div class="bg-zinc-100 min-h-full p-4" (click)="$event.stopPropagation()">
       <form
-        /* (ngSubmit)="" */
         [formGroup]="formulario"
-        class="mx-auto bg-white shadow-lg rounded-lg flex flex-col justify-center gap-4 border-2 border-zinc-400"
+        class="mx-auto flex flex-col justify-center gap-4 w-full"
       >
-        <div class="flex flex-col gap-4 w-full p-4">
-          <div class="flex gap-8 w-full">
-            <div class="flex flex-col gap-1 w-1/2">
-              <label for="inputTitle" class="block text-xl font-semibold text-heading"
-                >Titulo</label
-              >
-              <input
-                label="Titulo"
-                type="text"
-                title="inputTitle"
-                id="inputTitle"
-                formControlName="tarefaTitle"
-                placeholder="item ou objetivo"
-                class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-              />
+        <div class="flex flex-col gap-8 w-full p-4">
+          <app-input-component
+            type="text"
+            label="Titulo"
+            placeholder="item ou objetivo"
+            formControlName="tarefaTitle"
+          >
+          </app-input-component>
+
+          <app-input-component
+            type="date"
+            label="Data de criação"
+            placeholder="selecione a data"
+            formControlName="dataCriation"
+          >
+          </app-input-component>
+
+          <app-input-component
+            type="text"
+            label="Descrição"
+            placeholder="descreva o que você deseja fazer ou ter..."
+            formControlName="tarefaDescription"
+          >
+          </app-input-component>
+
+          <div>
+            <div class="flex w-full gap-4 items-center">
+              <span class="shrink-0 text-lg font-medium tracking-wide">Tipos de objetivos</span>
+              <span class="h-0.5 w-full bg-zinc-400 block"></span>
             </div>
-            <div class="flex flex-col gap-1 w-1/2">
-              <label for="inputDataCriation" class="block text-xl font-semibold text-heading"
-                >Data de criação</label
+            <div class="flex flex-wrap gap-4 mt-4">
+              <button
+                *ngFor="let type of types"
+                type="button"
+                [ngClass]="{
+                  'bg-zinc-400 text-zinc-900 ring-2 ring-zinc-600': tipoSelecionado === type.name,
+                  'bg-zinc-200 text-zinc-700': tipoSelecionado !== type.name
+                }"
+                class="p-2 rounded-lg transition-all duration-200"
+                (click)="tipoObjetivoSelecionado(type.name)"
+                [attr.aria-pressed]="tipoSelecionado === type.name"
               >
-              <input
-                type="date"
-                title="inputDataCriation"
-                id="inputDataCriation"
-                formControlName="dataCriation"
-                class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-              >
+                <fa-icon [icon]="typesIcons[type.name]"></fa-icon>
+                <span class="ml-2">{{ type.name }}</span>
+              </button>
             </div>
           </div>
 
-          <div class="flex w-full flex-col gap-1">
-            <label for="inputDescription" class="block text-xl font-semibold text-heading"
-              >Descrição</label
-            >
-            <input
-              type="text"
-              title="inputDescription"
-              formControlName="tarefaDescription"
-              placeholder="descreva o que você deseja fazer ou ter..."
-              class="placeholder:font-normal w-full border-2 border-zinc-300 rounded-md p-2 shadow-md active:outline-none focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:placeholder:font-semibold transition-all duration-300"
-            />
-          </div>
         </div>
 
-        <div class="flex gap-4 w-full p-4 justify-end">
-          <!-- <button
-            title="cancelarTarefa"
-            type="button"
-            (click)="cancelarFormulario()"
-            class="w-2/9 bg-zinc-300 hover:bg-zinc-400 hover:text-zinc-700 text-zinc-600 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300"
-          >
-            Cancelar
-          </button> -->
-          <!-- <button
-            title="addTarefa"
-            type="submit"
-            class="w-2/9 bg-zinc-400 hover:bg-zinc-500 hover:text-zinc-800 text-zinc-700 font-semibold py-3 px-4 rounded-md shadow-md transition-all duration-300"
-          >
-            Adiconar tarefa
-          </button> -->
-        </div>
       </form>
     </div>
 </div>

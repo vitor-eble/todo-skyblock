@@ -48,7 +48,7 @@ export class Home implements OnInit {
     try {
       this.cdr.detectChanges();
     } catch (e) {
-          // detectChanges pode lançar se já estivermos no ciclo de detecção; ignore nesse caso
+
     }
   }
 

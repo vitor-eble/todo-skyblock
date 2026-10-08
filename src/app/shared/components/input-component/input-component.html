@@ -1,17 +1,30 @@
-<div>
-    <label
-    for="email"
+<div class="flex flex-col gap-1 w-full">
+
+  <h5 class="text-lg font-medium tracking-wider">
+    {{ label }}
+  </h5>
+
+  <label
     class="flex items-center gap-2 border-zinc-300 border-2 text-sm rounded-sm w-full p-4 shadow-xs text-zinc-700 focus-within:ring-2 focus-within:ring-zinc-500"
-    >
-    <fa-icon [icon]="icon" class="text-zinc-400"></fa-icon>
+  >
+
+    @if (icon) {
+      <fa-icon [icon]="icon" class="text-zinc-400"></fa-icon>
+    }
+
     <input
-        [type]="tipe"
-        id="email"
-        class="w-full outline-none placeholder:text-sm placeholder:text-zinc-400"
-        [placeholder]="placeholder"
-        [title]="title"
-        [aria-label]="ariaLabel"
-        required
+      [type]="type"
+      class="w-full outline-none placeholder:text-sm placeholder:text-zinc-400"
+      [placeholder]="placeholder"
+      [title]="label"
+      [aria-label]="ariaLabel"
+      required
+      [readonly]="!!isReadOnly"
+      (input)="value = $any($event.target).value"
+      (blur)="onTouchedCb($event)"
+      [value]="value ?? ''"
     />
-    </label>
+
+  </label>
+
 </div>
