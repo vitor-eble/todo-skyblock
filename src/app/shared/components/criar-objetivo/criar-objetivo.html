@@ -27,14 +27,6 @@
           </app-input-component>
 
           <app-input-component
-            type="date"
-            label="Data de criação"
-            placeholder="selecione a data"
-            formControlName="dataCriation"
-          >
-          </app-input-component>
-
-          <app-input-component
             type="text"
             label="Descrição"
             placeholder="descreva o que você deseja fazer ou ter..."
@@ -64,6 +56,44 @@
               </button>
             </div>
           </div>
+
+          <div>
+            <div class="flex gap-4 items-end w-full">
+              <app-input-component
+              type="text"
+              label="Sub objetivos"
+              placeholder="adicione sub objetivos..."
+              formControlName="subObjetivoTitle"
+              >
+              </app-input-component>
+              <div>
+                <button
+                  type="button"
+                  class="p-4 w-16 justify-center items-center tracking-wider shadow font-medium bg-zinc-300 text-zinc-700 rounded-sm transition-all duration-200 hover:bg-zinc-500 hover:text-zinc-100 flex active:bg-zinc-600"
+                  (click)="addSubObjetivo()"
+                >
+                  ADD
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <ul class="mt-4">
+                <li *ngFor="let subObjetivo of subObjetivos" class="flex items-center gap-2 mb-2">
+                  <span class="text-zinc-700 w-full bg-zinc-200 p-4 rounded-sm shadow-sm">{{ subObjetivo.title }}</span>
+                  <button title="Remover sub objetivo" aria-label="Remover sub objetivo"
+                    type="button"
+                    class="p-4 w-18 justify-center tracking-wider shadow font-medium bg-red-500 text-white rounded-sm transition-all duration-200 hover:bg-red-700 hover:text-zinc-100 flex items-center active:bg-red-900"
+                    (click)="removerSubObjetivo(subObjetivo.id)"
+                  >
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
 
         </div>
 

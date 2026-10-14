@@ -4,10 +4,11 @@ import { CriarTarefa } from '../../services/criar-tarefa';
 import { Observable } from 'rxjs';
 import { Tarefa } from '../../models/tarefa';
 import { TypeIcon } from '../../models/typeIconModel';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { tipoIcons } from '../../icons/typeIcon';
 import { TypesObjectives } from '../../services/types-objectives';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { SubObjetivos } from '../../models/SubObjetivos';
 
 @Component({
   selector: 'app-criar-objetivo',
@@ -22,11 +23,16 @@ export class CriarObjetivo {
 
   formulario!: FormGroup;
   tarefas$: Observable<Tarefa[]>;
-  types: TypeIcon[] = [];
-  typesIcons: Record<string, IconDefinition> = tipoIcons;
   types$!: Observable<TypeIcon[]>
+
+  types: TypeIcon[] = [];
+  subObjetivos: SubObjetivos[] = [];
+
+  typesIcons: Record<string, IconDefinition> = tipoIcons;
   tipo!: string;
   tipoSelecionado: string | null = null;
+
+  faTrash = faTrash;
 
 
   constructor(
@@ -43,7 +49,7 @@ export class CriarObjetivo {
     this.formulario = this.FB.group({
       tarefaTitle: [null, Validators.required],
       tarefaDescription: [null, Validators.required],
-      dataCriation: [null, Validators.required]
+      subObjetivoTitle: [''],
     });
     this.types$.subscribe({
       next: (data) => {
@@ -62,11 +68,23 @@ export class CriarObjetivo {
     this.criarTarefa.criarObjetivo(
       this.formulario.get('tarefaTitle')?.value,
       this.formulario.get('tarefaDescription')?.value,
-      this.formulario.get('dataCriation')?.value
+      this.criarTarefa.getSubObjetivos()
     );
     this.formulario.reset();
+    this.subObjetivos = [];
     this.fecharModalObjetivo.emit();
+  }
 
+  addSubObjetivo() {
+    const title = this.formulario.get('subObjetivoTitle')?.value.trim();
+    if (!title) {
+      return
+    }
+
+    this.criarTarefa.addSubObjetivo(title);
+    this.atualizarSubObjetivos();
+
+    this.formulario.get('subObjetivoTitle')?.reset();
   }
 
   fecharModal(){
@@ -76,6 +94,15 @@ export class CriarObjetivo {
 
   tipoObjetivoSelecionado(tipo: string) {
     this.tipoSelecionado = this.tipoSelecionado === tipo ? null : tipo;
+  }
+
+  removerSubObjetivo(id: number): void {
+    this.criarTarefa.removerSubObjetivo(id);
+    this.atualizarSubObjetivos();
+  }
+
+  atualizarSubObjetivos(): void {
+    this.subObjetivos = this.criarTarefa.getSubObjetivos();
   }
 
 }
