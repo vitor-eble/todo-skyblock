@@ -16,11 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Login } from './pages/login/login';
 import { InputComponent } from './shared/components/input-component/input-component';
 import { MenuLateral } from './shared/components/menu-lateral/menu-lateral';
-import { Mining } from './pages/mining/mining';
-import { Blaze } from './pages/blaze/blaze';
-import { Eman } from './pages/eman/eman';
-import { Fishing } from './pages/fishing/fishing';
-import { Farming } from './pages/farming/farming';
 import { CriarObjetivo } from './shared/components/criar-objetivo/criar-objetivo';
 
 @NgModule({
@@ -30,11 +25,6 @@ import { CriarObjetivo } from './shared/components/criar-objetivo/criar-objetivo
     Login,
     InputComponent,
     MenuLateral,
-    Mining,
-    Blaze,
-    Eman,
-    Fishing,
-    Farming,
     CriarObjetivo,
   ],
   imports: [

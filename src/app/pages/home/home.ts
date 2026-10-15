@@ -10,6 +10,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { CriarTarefa } from '../../shared/services/criar-tarefa';
+import { SubObjetivos } from '../../shared/models/SubObjetivos';
 
 
 @Component({
@@ -72,5 +73,14 @@ export class Home implements OnInit {
   toggleModal(): void {
     this.criarObjetivoModal = !this.criarObjetivoModal
   }
+
+  atualizarSubObjetivo(
+    sub: SubObjetivos,
+   event: Event
+  ): void {
+    const checkbox = event.target as HTMLInputElement;
+
+    sub.completed = checkbox.checked;
+}
 
 }

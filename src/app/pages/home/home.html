@@ -83,9 +83,23 @@
                   {{ tarefa.description }}
                 </span>
               </p>
+
+              <span>
+                {{ tarefa.type }}
+              </span>
+
              <div *ngFor="let subtarefa of tarefa.subObjetivos">
-              <span class="text-zinc-700 w-full bg-zinc-200 p-4 rounded-sm shadow-sm">{{ subtarefa.title }}</span>
+              <!-- <span class="text-zinc-700 w-full p-4 rounded-sm shadow-sm">{{ subtarefa.title }}</span> -->
+              <input type="checkbox" title="nsei" [checked]="subtarefa.completed" (change)="atualizarSubObjetivo(subtarefa, $event)">
+
+              <span
+              [class.line-through]="subtarefa.completed"
+              [class.opacity-50]="subtarefa.completed"
+              >
+              {{ subtarefa.title}}
+            </span>
              </div>
+
               <div class="flex gap-4 justify-end mr-2">
                 <button
                   (click)="excluirObjetivo(tarefa.id)"

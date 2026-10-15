@@ -49,6 +49,7 @@ export class CriarObjetivo {
     this.formulario = this.FB.group({
       tarefaTitle: [null, Validators.required],
       tarefaDescription: [null, Validators.required],
+      tarefaType: [null, Validators.required],
       subObjetivoTitle: [''],
     });
     this.types$.subscribe({
@@ -64,36 +65,55 @@ export class CriarObjetivo {
   }
 
   addTarefa(){
-    console.log(this.formulario.get('tarefaTitle')?.value);
     this.criarTarefa.criarObjetivo(
       this.formulario.get('tarefaTitle')?.value,
       this.formulario.get('tarefaDescription')?.value,
-      this.criarTarefa.getSubObjetivos()
+      this.formulario.get('tarefaType')?.value,
+      this.criarTarefa.getSubObjetivos(),
     );
-    this.formulario.reset();
-    this.subObjetivos = [];
+    this.criarTarefa.limparSubObjetivos();
+    this.resetFormulario();
     this.fecharModalObjetivo.emit();
   }
 
   addSubObjetivo() {
-    const title = this.formulario.get('subObjetivoTitle')?.value.trim();
+    const title = this.formulario.get('subObjetivoTitle')?.value?.trim();
     if (!title) {
-      return
+      return;
     }
 
     this.criarTarefa.addSubObjetivo(title);
+    this.formulario.get('subObjetivoTitle')?.reset('');
+    this.formulario.markAsPristine();
+    this.formulario.markAsUntouched();
     this.atualizarSubObjetivos();
-
-    this.formulario.get('subObjetivoTitle')?.reset();
   }
 
   fecharModal(){
     this.fecharModalObjetivo.emit();
-    this.formulario.reset();
+    this.resetFormulario();
+    this.subObjetivos = [];
+    this.criarTarefa.limparSubObjetivos();
+  }
+
+  resetFormulario(): void {
+    this.formulario.reset({
+      tarefaTitle: null,
+      tarefaDescription: null,
+      tarefaType: null,
+      subObjetivoTitle: ''
+    });
+    this.subObjetivos = [];
+    this.tipoSelecionado = null;
+    this.formulario.markAsPristine();
+    this.formulario.markAsUntouched();
+    this.formulario.updateValueAndValidity();
   }
 
   tipoObjetivoSelecionado(tipo: string) {
-    this.tipoSelecionado = this.tipoSelecionado === tipo ? null : tipo;
+    const novoTipo = this.tipoSelecionado === tipo ? null : tipo;
+    this.tipoSelecionado = novoTipo;
+    this.formulario.get('tarefaType')?.setValue(novoTipo);
   }
 
   removerSubObjetivo(id: number): void {

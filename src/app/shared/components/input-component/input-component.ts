@@ -43,7 +43,7 @@ export class InputComponent implements ControlValueAccessor {
   onTouchedCb: (_: any) => void = () => {};
 
   writeValue(v: any): void {
-    this.value = v;
+    this.innerValue = v ?? '';
   }
 
   registerOnChange(fn: any): void {

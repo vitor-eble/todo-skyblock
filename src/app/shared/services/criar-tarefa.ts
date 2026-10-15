@@ -11,16 +11,18 @@ export class CriarTarefa {
 
   tarefas$ = this.tarefasSubject.asObservable();
 
-  criarObjetivo(title: string, tDescription: string, subObjetivos: SubObjetivos[]) {
+  criarObjetivo(title: string, tDescription: string,type: string, subObjetivos: SubObjetivos[]) {
     const novaTarefa: Tarefa = {
       id: this.tarefasSubject.value.length + 1,
       title: title,
       description: tDescription,
+      type: type,
       dataCriation: new Date(),
-      subObjetivos: subObjetivos
+      subObjetivos: [...subObjetivos]
     };
     const tarefasAtuais = this.tarefasSubject.value;
     this.tarefasSubject.next([...tarefasAtuais, novaTarefa]);
+    this.subObjetivos = [];
   }
 
   deletarObjetivo(id:number){
@@ -43,6 +45,10 @@ export class CriarTarefa {
   }
 
   getSubObjetivos(): SubObjetivos[] {
-    return this.subObjetivos;
+    return [...this.subObjetivos];
+  }
+
+  limparSubObjetivos(): void {
+    this.subObjetivos = [];
   }
 }
