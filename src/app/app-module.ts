@@ -17,16 +17,10 @@ import { Login } from './pages/login/login';
 import { InputComponent } from './shared/components/input-component/input-component';
 import { MenuLateral } from './shared/components/menu-lateral/menu-lateral';
 import { CriarObjetivo } from './shared/components/criar-objetivo/criar-objetivo';
+import { Inicio } from './pages/inicio/inicio';
 
 @NgModule({
-  declarations: [
-    App,
-    Home,
-    Login,
-    InputComponent,
-    MenuLateral,
-    CriarObjetivo,
-  ],
+  declarations: [App, Home, Login, InputComponent, MenuLateral, CriarObjetivo, Inicio],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,8 +29,8 @@ import { CriarObjetivo } from './shared/components/criar-objetivo/criar-objetivo
     FontAwesomeModule,
     CommonModule,
     HttpClientModule,
-    IonAccordion
-],
+    IonAccordion,
+  ],
   providers: [provideBrowserGlobalErrorListeners(), provideIonicAngular()],
   bootstrap: [App],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

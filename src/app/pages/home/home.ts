@@ -26,12 +26,7 @@ export class Home implements OnInit {
   dataCriation!: number;
   menuAberto: boolean = false;
   criarObjetivoModal: boolean = false
-  tarefas$: Observable<Tarefa[]>;
 
-  tarefaAbertaId: number | null = null;
-
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
   faPlus = faPlus;
   faBars = faBars;
 
@@ -41,8 +36,7 @@ export class Home implements OnInit {
     private router: Router,
     private criarTarefa: CriarTarefa,
   ) {
-    this.faIconLibrary.addIcons(faEye, faEyeSlash, faPlus, faBars);
-    this.tarefas$ = this.criarTarefa.tarefas$;
+    this.faIconLibrary.addIcons( faPlus, faBars);
   }
 
   ngOnInit() {
@@ -58,13 +52,6 @@ export class Home implements OnInit {
     this.menuAberto = false
   }
 
-  verTarefa(tarefa: Tarefa): void {
-    this.tarefaAbertaId = this.tarefaAbertaId === tarefa.id ? null : tarefa.id;
-  }
-
-  excluirObjetivo(id: number): void {
-    this.criarTarefa.deletarObjetivo(id);
-  }
 
   toggleMenu(): void {
     this.menuAberto = !this.menuAberto;
@@ -73,14 +60,5 @@ export class Home implements OnInit {
   toggleModal(): void {
     this.criarObjetivoModal = !this.criarObjetivoModal
   }
-
-  atualizarSubObjetivo(
-    sub: SubObjetivos,
-   event: Event
-  ): void {
-    const checkbox = event.target as HTMLInputElement;
-
-    sub.completed = checkbox.checked;
-}
 
 }
